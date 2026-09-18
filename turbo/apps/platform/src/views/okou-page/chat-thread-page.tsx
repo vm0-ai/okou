@@ -5947,6 +5947,7 @@ function MessageAttachment({
           openVideoLightbox({
             url: a.url,
             filename: a.filename,
+            preview: a.signals,
           });
         }}
         posterClassName="h-full w-full"
@@ -5967,7 +5968,7 @@ function MessageAttachment({
         filename={a.filename}
         url={a.url}
         kind={a.kind}
-        preview={a.kind === "html" ? a.signals : undefined}
+        preview={a.signals}
         text$={a.signals.text$}
       />
     );
@@ -5978,6 +5979,7 @@ function MessageAttachment({
         filename={a.filename}
         url={a.url}
         contentType={a.contentType}
+        preview={a.signals}
       />
     );
   }
@@ -5986,6 +5988,7 @@ function MessageAttachment({
       filename={a.filename}
       url={a.url}
       contentType={a.contentType}
+      preview={a.signals}
     />
   );
 }
@@ -6496,6 +6499,7 @@ function UserMessageFileReference({
           openVideoLightbox({
             url: signals.url,
             filename: part.filenameSnapshot,
+            preview: signals,
           });
         }}
         posterClassName="h-full w-full"
@@ -6515,7 +6519,7 @@ function UserMessageFileReference({
         filename={part.filenameSnapshot}
         url={signals.url}
         kind={signals.kind}
-        preview={signals.kind === "html" ? signals : undefined}
+        preview={signals}
       />
     );
   } else if (signals.kind === "audio") {
@@ -6524,6 +6528,7 @@ function UserMessageFileReference({
         filename={part.filenameSnapshot}
         url={signals.url}
         contentType={part.contentType}
+        preview={signals}
       />
     );
   } else {
@@ -6531,6 +6536,7 @@ function UserMessageFileReference({
       <FileAttachmentChip
         contentType={part.contentType}
         filename={part.filenameSnapshot}
+        preview={signals}
         url={signals.url}
       />
     );
