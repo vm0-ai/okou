@@ -2,14 +2,15 @@ import type { ReactNode } from "react";
 
 /**
  * The workspace sheet: the app's canvas, framed by the chrome around it. The
- * sidebar supplies the left edge in the app shell, so the sheet drops that
- * margin there; a surface without a sidebar keeps the frame on all four sides.
+ * expanded chat list supplies the left edge in the app shell, so the sheet
+ * drops that margin there. Beside only the navigation rail, or without a
+ * sidebar, the sheet keeps the frame on all four sides.
  */
 export function WorkspaceInset({
   beside = "sidebar",
   children,
 }: {
-  readonly beside?: "sidebar" | "nothing";
+  readonly beside?: "sidebar" | "rail" | "nothing";
   readonly children: ReactNode;
 }) {
   return (

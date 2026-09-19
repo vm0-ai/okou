@@ -26,6 +26,7 @@ import { AvatarFromUrl } from "./sidebar-shared.tsx";
 import { QueueDrawer } from "../queue-page/queue-drawer.tsx";
 import {
   sidebarExpanded$,
+  sidebarOff$,
   setSidebarExpanded$,
   isChatRoute,
 } from "../../signals/okou-page/nav.ts";
@@ -386,6 +387,7 @@ function MobileSidebarMount() {
 
 function SidebarLayoutInner({ children }: { children: ReactNode }) {
   const paletteColorTheme = useGet(paletteColorTheme$);
+  const chatListHidden = useGet(sidebarOff$);
   const isDesktop = useMediaQuery(SIDEBAR_DESKTOP_MEDIA_QUERY);
   const shellDocumentAttributesRef = useSet(shellDocumentAttributesRef$);
 
@@ -407,7 +409,7 @@ function SidebarLayoutInner({ children }: { children: ReactNode }) {
       <AttachmentLightboxMount />
       <QueueDrawer />
       {isDesktop ? <Sidebar isDesktop /> : <MobileSidebarMount />}
-      <WorkspaceInset>
+      <WorkspaceInset beside={chatListHidden ? "rail" : "sidebar"}>
         <InstallBanner />
         <IosInstallModal />
         {!isDesktop && <MobileTopBar />}
